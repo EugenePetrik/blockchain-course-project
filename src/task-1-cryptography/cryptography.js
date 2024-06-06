@@ -53,16 +53,17 @@ for (const key of keys) {
 */
 
 const correctKeyHex = '54684020247570407220244063724074';
-const key = Buffer.from(correctKeyHex, 'hex');
-const iv = Buffer.from('656e6372797074696f6e496e74566563', 'hex');
+const key = Buffer.from(correctKeyHex, 'hex'); // Convert the key from HEX to a Buffer
+const iv = Buffer.from('656e6372797074696f6e496e74566563', 'hex'); // Convert the IV from HEX to a Buffer
 const encryptedMessage = Buffer.from(
   '876b4e970c3516f333bcf5f16d546a87aaeea5588ead29d213557efc1903997e',
   'hex',
-);
+); // Convert the encrypted message from HEX to a Buffer
 
+// Create a decipher object using AES-128-CBC mode
 const decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
-let decrypted = decipher.update(encryptedMessage, 'hex', 'utf8');
-decrypted += decipher.final('utf8');
+let decrypted = decipher.update(encryptedMessage, 'hex', 'utf8'); // Decrypt the message
+decrypted += decipher.final('utf8'); // Finalize the decryption
 
 console.log('Decrypted message:', decrypted);
 
@@ -74,15 +75,16 @@ console.log('Decrypted message:', decrypted);
   Task 3: Generate an asymmetric Elliptic Curve key-pair
 */
 
+// Generate an EC key-pair using the secp256k1 curve
 const { publicKey, privateKey } = crypto.generateKeyPairSync('ec', {
-  namedCurve: 'secp256k1',
+  namedCurve: 'secp256k1', // Curve name
   publicKeyEncoding: {
-    type: 'spki',
-    format: 'pem',
+    type: 'spki', // Public key format
+    format: 'pem', // Public key encoding
   },
   privateKeyEncoding: {
-    type: 'pkcs8',
-    format: 'pem',
+    type: 'pkcs8', // Private key format
+    format: 'pem', // Private key encoding
   },
 });
 
