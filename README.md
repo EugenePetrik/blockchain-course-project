@@ -11,8 +11,14 @@
 npm install
 ```
 
-#### Run file
+#### Run JS files
 
 ```bash
 node path_to_file
+```
+
+#### Run TS files
+
+```bash
+npx ts-node path_to_file
 ```
