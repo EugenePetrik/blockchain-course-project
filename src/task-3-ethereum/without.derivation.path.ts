@@ -1,20 +1,24 @@
-import { ethers } from 'ethers';
+import { ethers, type Wallet, type JsonRpcProvider } from 'ethers';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const infuraProjectId = String(process.env.INFURA_PROJECT_ID);
-const accountAddress1 = String(process.env.ACCOUNT_ADDRESS_ONE);
-const accountAddress2 = String(process.env.ACCOUNT_ADDRESS_TWO);
+const infuraProjectId: string = String(process.env.INFURA_PROJECT_ID);
 
-const provider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/v3/${infuraProjectId}`);
+const firstWalletPrivateKey: string = String(process.env.FIRST_WALLET_PRIVATE_KEY);
+const secondWalletPrivateKey: string = String(process.env.SECOND_WALLET_PRIVATE_KEY);
 
-const getBalance = async (account: string): Promise<void> => {
-  const balance = await provider.getBalance(account);
-  console.log(`Balance of account ${account}: ${ethers.formatEther(balance)} ETH`);
-};
+async function main() {
+  const firstWallet: Wallet = new ethers.Wallet(firstWalletPrivateKey);
+  const secondWallet: Wallet = new ethers.Wallet(secondWalletPrivateKey);
 
-(async () => {
-  await getBalance(accountAddress1);
-  await getBalance(accountAddress2);
-})();
+  const provider: JsonRpcProvider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/v3/${infuraProjectId}`);
+
+  const firstWalletBalance: bigint = await provider.getBalance(firstWallet.address);
+  const secondWalletBalance: bigint = await provider.getBalance(secondWallet.address);
+
+  console.log(`Balance of the 1st wallet: ${ethers.formatEther(firstWalletBalance)} ETH`);
+  console.log(`Balance of the 2st wallet: ${ethers.formatEther(secondWalletBalance)} ETH`);
+}
+
+main().catch(error => console.error('Error:', error));
