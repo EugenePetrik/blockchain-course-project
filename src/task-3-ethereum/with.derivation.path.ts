@@ -1,4 +1,10 @@
-import { ethers, type HDNodeWallet, type JsonRpcProvider, type Mnemonic, type Wallet } from 'ethers';
+import {
+  ethers,
+  type HDNodeWallet,
+  type JsonRpcProvider,
+  type Mnemonic,
+  type Wallet,
+} from 'ethers';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -8,7 +14,7 @@ const mnemonicPhrase = String(process.env.METAMASK_MNEMONIC_PHRASE);
 
 // Define the Sepolia testnet RPC URL
 const provider: JsonRpcProvider = new ethers.JsonRpcProvider(
-  `https://sepolia.infura.io/v3/${infuraProjectId}`
+  `https://sepolia.infura.io/v3/${infuraProjectId}`,
 );
 
 // Create a Mnemonic object

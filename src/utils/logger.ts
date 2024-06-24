@@ -5,11 +5,9 @@ const logger = createLogger({
   format: format.combine(
     format.colorize(),
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`)
+    format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`),
   ),
-  transports: [
-    new transports.Console()
-  ],
+  transports: [new transports.Console()],
 });
 
 export { logger };
