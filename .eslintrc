@@ -19,5 +19,8 @@
     "no-console": "error",
     "no-restricted-syntax": "off",
     "no-unused-vars": "off",
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
   },
 }
