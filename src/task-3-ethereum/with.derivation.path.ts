@@ -6,6 +6,7 @@ import {
   type Wallet,
 } from 'ethers';
 import * as dotenv from 'dotenv';
+import { logger } from '../utils/logger';
 
 dotenv.config();
 
@@ -32,7 +33,7 @@ const getBalance = async (index: number): Promise<void> => {
   const wallet: Wallet = new ethers.Wallet(walletNode.privateKey, provider);
 
   const balance: bigint = await provider.getBalance(wallet.address);
-  console.log(`Balance of account ${index}: ${ethers.formatEther(balance)} ETH`);
+  logger.info(`Balance of account ${index}: ${ethers.formatEther(balance)} ETH`);
 };
 
 (async () => {

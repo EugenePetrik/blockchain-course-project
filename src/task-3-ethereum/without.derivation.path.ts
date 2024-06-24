@@ -1,5 +1,6 @@
 import { ethers, type Wallet, type JsonRpcProvider } from 'ethers';
 import * as dotenv from 'dotenv';
+import { logger } from '../utils/logger';
 
 dotenv.config();
 
@@ -19,10 +20,10 @@ async function main() {
   const firstWalletBalance: bigint = await provider.getBalance(firstWallet.address);
   const secondWalletBalance: bigint = await provider.getBalance(secondWallet.address);
 
-  console.log(`Balance of the 1st wallet: ${ethers.formatEther(firstWalletBalance)} ETH`);
-  console.log(
+  logger.info(`Balance of the 1st wallet: ${ethers.formatEther(firstWalletBalance)} ETH`);
+  logger.info(
     `Balance of the 2st wallet: ${ethers.formatEther(secondWalletBalance)} ETH`,
   );
 }
 
-main().catch(error => console.error('Error:', error));
+main().catch(error => logger.error('Error:', error));
