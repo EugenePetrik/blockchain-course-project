@@ -1,4 +1,5 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
+import { logger } from '../utils/logger';
 
 /*
   Task 1: Identify the correct symmetric key
@@ -23,9 +24,9 @@ const correctHash = 'f28fe539655fd6f7275a09b7c3508a3f81573fc42827ce34ddf1ec8d5c2
 for (const key of keys) {
   const hash = crypto.createHash('sha256').update(Buffer.from(key, 'hex')).digest('hex');
 
-  console.log(`Key: ${key}`);
-  console.log(`Hash: ${hash}`);
-  console.log(`Matches: ${hash === correctHash}\n`);
+  logger.info(`Key: ${key}`);
+  logger.info(`Hash: ${hash}`);
+  logger.info(`Matches: ${hash === correctHash}\n`);
 }
 
 // Answer:
@@ -65,7 +66,7 @@ const decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
 let decrypted = decipher.update(encryptedMessage, 'hex', 'utf8'); // Decrypt the message
 decrypted += decipher.final('utf8'); // Finalize the decryption
 
-console.log('Decrypted message:', decrypted);
+logger.info('Decrypted message:', decrypted);
 
 // Answer:
 
@@ -88,8 +89,8 @@ const { publicKey, privateKey } = crypto.generateKeyPairSync('ec', {
   },
 });
 
-console.log('Public Key:\n', publicKey);
-console.log('Private Key:\n', privateKey);
+logger.info('Public Key:\n', publicKey);
+logger.info('Private Key:\n', privateKey);
 
 // Answer:
 
@@ -116,7 +117,7 @@ sign.end();
 
 const signature = sign.sign(privateKey, 'hex');
 
-console.log('Digital Signature:\n', signature);
+logger.info('Digital Signature:\n', signature);
 
 // Answer:
 
