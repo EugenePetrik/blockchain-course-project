@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write . && eslint . --ext js --fix",
+    "format": "prettier --write . && eslint . --ext ts --fix",
     "check-format": "prettier --check .",
-    "check-lint": "eslint . --ext js",
+    "check-lint": "eslint . --ext ts",
     "check-all": "npm run check-format && npm run check-lint"
   },
   "keywords": [
