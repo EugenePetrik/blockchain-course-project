@@ -137,7 +137,11 @@ declare module '@synthetixio/synpress/commands/metamask' {
 
   export function rejectPermisionToApproveAll(): Promise<boolean>; //typo in lib name function
 
-  export function allowToAddNetwork({ waitForEvent }?: { waitForEvent: any }): Promise<boolean>;
+  export function allowToAddNetwork({
+    waitForEvent,
+  }?: {
+    waitForEvent: any;
+  }): Promise<boolean>;
 
   export function rejectToAddNetwork(): Promise<boolean>;
 
@@ -163,15 +167,18 @@ declare module '@synthetixio/synpress/commands/metamask' {
       password: any;
       enableAdvancedSettings: any;
       enableExperimentalSettings: any;
-    }
+    },
   ): Promise<boolean>;
 
   export function activateAdvancedSetting(
     toggleOn: any,
     toggleOff: any,
     skipSetup: any,
-    experimental: any
+    experimental: any,
   ): Promise<boolean>;
 
-  export function setupSettings(enableAdvancedSettings: any, enableExperimentalSettings: any): Promise<boolean>;
+  export function setupSettings(
+    enableAdvancedSettings: any,
+    enableExperimentalSettings: any,
+  ): Promise<boolean>;
 }
