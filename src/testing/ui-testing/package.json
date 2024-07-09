@@ -1,0 +1,18 @@
+{
+  "name": "synpress-pet-shop-test",
+  "version": "1.0.0",
+  "description": "Sample test framework with synpress as a plugin",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "test": "yarn playwright test"
+  },
+  "dependencies": {
+    "@playwright/test": "1.44.1",
+    "@synthetixio/synpress": "3.7.3",
+    "dotenv": "16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.9"
+  }
+}
