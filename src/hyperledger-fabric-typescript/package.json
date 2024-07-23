@@ -1,0 +1,33 @@
+{
+  "name": "blockchain-hyperledger-fabric-chaincode-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "compile": "npx tsc",
+    "test": "mocha -r ts-node/register tests/**/*.ts"
+  },
+  "keywords": [
+    "Hyperledger fabric",
+    "Lottery chaincode",
+    "API auto-tests for Lottery"
+  ],
+  "author": "Yevhen Petryk",
+  "license": "ISC",
+  "dependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.11",
+    "@types/sinon": "^17.0.3",
+    "@types/sinon-chai": "^3.2.12",
+    "chai": "^4.4.1",
+    "fabric-contract-api": "^2.5.6",
+    "fabric-network": "^2.2.20",
+    "fabric-shim": "^2.5.6",
+    "mocha": "^10.6.0",
+    "sinon": "^18.0.0",
+    "sinon-chai": "^3.7.0",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.5.3"
+  }
+}
