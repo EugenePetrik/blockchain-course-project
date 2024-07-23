@@ -200,7 +200,7 @@ describe('LotteryContract', () => {
         await lottery.pickWinner(ctx);
       } catch (err) {
         if (err instanceof Error) {
-          expect(err.message).to.equal('Not picking winner now');
+          expect(err.message).to.equal('Only the owner can pick a winner');
         } else {
           throw err;
         }
