@@ -10,8 +10,10 @@ contract Lottery {
     enum LotteryState { Open, Closed, PickingWinner }
     LotteryState public lotteryState;
 
-    event LotteryEntered(address indexed player);  // Event to log when a player enters the lottery
-    event WinnerPicked(address indexed winner);  // Event to log when a winner is picked
+    mapping(address => bool) private hasEntered;
+
+    event LotteryEntered(address indexed player);
+    event WinnerPicked(address indexed winner);
 
     constructor() {
         owner = msg.sender;
@@ -19,34 +21,31 @@ contract Lottery {
         lotteryState = LotteryState.Closed;
     }
 
-    // Modifier to restrict functions to only the owner
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function");
         _;
     }
 
-    // Modifier to restrict functions to when the lottery is open
     modifier lotteryOpen() {
         require(lotteryState == LotteryState.Open, "Lottery is not open");
         _;
     }
 
-    // Function to start the lottery, callable only by the owner
     function startLottery() external onlyOwner {
         require(lotteryState == LotteryState.Closed, "Can't start a new lottery yet");
         lotteryState = LotteryState.Open;
     }
 
-    // Function to enter the lottery by sending Ether, callable only when the lottery is open
     function enterLottery() external payable lotteryOpen {
         require(msg.sender != owner, "Owner can't participate");
         require(msg.value >= ticketPrice, "Not enough ETH sent to enter lottery");
-        
+        require(!hasEntered[msg.sender], "You can only enter once per round");
+
         players.push(msg.sender);
+        hasEntered[msg.sender] = true;
         emit LotteryEntered(msg.sender);
     }
 
-    // Function to end the lottery, callable only by the owner
     function endLottery() external onlyOwner {
         require(lotteryState == LotteryState.Open, "Lottery is not open");
         require(players.length >= 3, "Not enough players to end the lottery");
@@ -55,7 +54,6 @@ contract Lottery {
         pickWinner();
     }
 
-    // Internal function to pick a winner using a pseudorandom method
     function pickWinner() internal onlyOwner {
         uint256 randomIndex = uint256(
             keccak256(
@@ -71,11 +69,12 @@ contract Lottery {
 
         emit WinnerPicked(winner);
 
-        // Reset the lottery
+        for (uint i = 0; i < players.length; i++) {
+            hasEntered[players[i]] = false;
+        }
         delete players;
         lotteryState = LotteryState.Closed;
     }
 
-    // Fallback function to receive Ether
     receive() external payable {}
 }
