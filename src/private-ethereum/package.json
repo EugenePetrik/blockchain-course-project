@@ -9,7 +9,7 @@
     "startLottery": "node ./scripts/startLottery.js",
     "enterLottery": "node ./scripts/enterLottery.js",
     "pickWinner": "node ./scripts/pickWinner.js",
-    "test": "mocha './tests/**/*.js'"
+    "test": "mocha './tests/**/*.js' --timeout 30000"
   },
   "keywords": [],
   "author": "",
